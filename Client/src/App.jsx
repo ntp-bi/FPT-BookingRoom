@@ -1,11 +1,11 @@
 import React from 'react'
+import Layout from './layout/Layout'
 import "./App.scss"
-import Router from './router/Router'
 
 const App = () => {
   return (
     <div>
-      <Router/>
+      <Layout/>
     </div>
   )
 }

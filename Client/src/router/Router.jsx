@@ -17,7 +17,7 @@ import Login from "../pages/login/Login";
 const Router = () => {
     return (
         <Routes>
-            <Route path={configPath.home} element={<Home />} />
+            <Route path={configPath.home} exact element={<Home />} />
             <Route path={configPath.reservation} element={<Reservation />} />
             <Route path={configPath.roomdetail} element={<RoomDetail />} />
             <Route

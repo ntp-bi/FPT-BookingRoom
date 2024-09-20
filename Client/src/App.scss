@@ -21,6 +21,12 @@ body {
     font-size: 1.6rem;
 }
 
+.main {
+    min-height: 100vh;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
 section {
     padding: 50px 0px;
 }
@@ -31,7 +37,7 @@ h3,
 h4,
 h5,
 h6 {
-    color: $heading-color;
+    color: $header-color;
 }
 
 a {
@@ -70,7 +76,7 @@ ul {
 .secondary__btn a {
     text-decoration: none;
     font-size: 1.1rem;
-    color: $heading-color;
+    color: $header-color;
 }
 
 .secondary__btn a:hover {
@@ -86,5 +92,5 @@ ul {
     border-radius: 50px;
     font-weight: 500;
     font-size: 1.7rem;
-    color: $heading-color;
+    color: $header-color;
 }
