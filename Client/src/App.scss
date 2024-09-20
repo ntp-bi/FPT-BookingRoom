@@ -1,0 +1,90 @@
+@use "./sass/" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Island+Moments&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+html {
+    font-size: 62.5%; 
+}
+
+body {
+    font-family: $font-name;
+    background-color: #fff;
+    color: $text-color;
+    font-size: 1.6rem;
+}
+
+section {
+    padding: 50px 0px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $heading-color;
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+ul {
+    list-style: none;
+}
+
+.primary__btn {
+    background: $secondary-color !important;
+    border: none !important;
+    border-radius: 50px !important;
+    padding: 0.4rem 1.5rem !important;    
+}
+
+.primary__btn a {
+    font-size: 1.1rem;
+    text-decoration: none;
+    color: #fff;
+}
+
+.primary__btn a:hover {
+    color: inherit;
+}
+
+.secondary__btn {
+    background: transparent !important;
+    color: #0b2727 !important;
+    border: none !important;
+    font-weight: 500 !important;
+}
+
+.secondary__btn a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    color: $heading-color;
+}
+
+.secondary__btn a:hover {
+    color: inherit;
+}
+
+.section__subtitle {
+    background: $secondary-color;
+    font-family: $subtitle-font-name;
+    width: max-content;
+    padding: 0px 0.5rem;
+    padding-right: 1rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 1.7rem;
+    color: $heading-color;
+}
