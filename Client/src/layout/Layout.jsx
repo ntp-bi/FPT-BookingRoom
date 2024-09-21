@@ -10,9 +10,7 @@ const Layout = () => {
     return (
         <>
             <Header />
-            <Container sx={{ maxWidth: "1300px !important" }}>
-                <Router />
-            </Container>
+            <Router />
             <Footer />
         </>
     );

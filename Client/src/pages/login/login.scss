@@ -1,0 +1,141 @@
+@use "../../sass/" as *;
+
+.login {
+    background-color: #f5f5f5;
+    height: 100vh;
+
+    .wrapper {
+        max-width: 90rem;
+        width: 100%;
+        margin: auto;
+
+        @include tablet {
+            max-width: 70rem;
+        }
+
+        @include mobile {
+            max-width: 40rem;
+        }
+    }
+
+    &__container {
+        @include flex(center, flex-start);
+        width: 100%;
+        height: 100%;
+        margin-top: 160px;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        border-radius: 8px;
+
+        &__background {
+            width: 50rem;
+            height: 50rem;
+            object-fit: cover;
+
+            @include tablet {
+                width: 35rem;
+                height: 35rem;
+            }
+
+            @include mobile {
+                display: none;
+            }
+        }
+
+        &__form {
+            min-height: 50.5rem;
+            width: 100%;
+            height: 100%;
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            background-color: $secondary-color;
+            position: relative;
+
+            @include mobile {
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+            }
+
+            &__content {
+                text-align: center;
+
+                img {
+                    width: 8rem;
+                    height: 8rem;
+                    object-fit: cover;
+                    position: relative;
+                    top: -40px;
+
+                    @include tablet {
+                        width: 7rem;
+                        height: 7rem;
+                        top: -36px;
+                    }
+                }
+
+                h2 {
+                    font-size: 3rem;
+                    color: #fff;
+                    letter-spacing: 4px;
+                    margin: -20px 0 20px;
+
+                    @include tablet {
+                        font-size: 2.4rem;
+                    }
+                }
+
+                &__input {
+                    display: flex;
+                    flex-direction: column;
+
+                    .item {
+                        width: 80%;
+                        background-color: #fff;
+                        margin: 20px auto;
+                        border-radius: 4px;
+
+                        input {
+                            font-size: 1.4rem;
+                            color: #0b2727;
+
+                            @include tablet {
+                                font-size: 1.1rem;
+                            }
+                        }
+
+                        label.MuiFormLabel-root {
+                            font-size: 1.4rem;
+
+                            @include tablet {
+                                font-size: 1.1rem;
+                            }
+                        }
+
+                        .MuiOutlinedInput-root {
+                            &:hover .MuiOutlinedInput-notchedOutline {
+                                border-color: #0b2727;
+                            }
+
+                            &.Mui-focused .MuiOutlinedInput-notchedOutline {
+                                border-color: #0b2727;
+                            }
+                        }
+                    }
+                }
+
+                .button {
+                    background: #000;
+                    color: #fff;
+                    width: 80%;
+                    font-size: 1.6rem;
+                    padding: 12px;
+                    text-transform: capitalize;
+                    letter-spacing: 4px;
+
+                    @include tablet {
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+        }
+    }
+}
