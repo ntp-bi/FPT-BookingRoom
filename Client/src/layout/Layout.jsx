@@ -8,11 +8,13 @@ import Router from "../router/Router";
 
 const Layout = () => {
     return (
-        <Container sx={{ maxWidth: "1300px !important"}}>
+        <>
             <Header />
-            <Router />
+            <Container sx={{ maxWidth: "1300px !important" }}>
+                <Router />
+            </Container>
             <Footer />
-        </Container>
+        </>
     );
 };
 

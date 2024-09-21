@@ -1,0 +1,60 @@
+@use "../../sass/" as *;
+
+.footer {
+    padding: 50px 0;
+    background-color: #f8f9fa;
+    width: 100%;
+    color: $text-color;
+    box-shadow: 0 1px 3px #e0e0e0;
+
+
+    &__item {
+        img {
+            width: 156px;
+            height: 67px;
+            object-fit: cover;
+        }
+
+        p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        &__icons {
+            @include flex(center, unset);
+            gap: 20px;
+
+            svg {
+                width: 2rem;
+                height: 2rem;
+                color: #888;
+                cursor: pointer;
+
+                &:hover {
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+
+    &__title {
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: $header-color;
+        margin-bottom: 2rem;
+    }
+
+    &__content {
+        li {
+            font-size: 1.5rem;            
+            line-height: 2rem;
+            margin: 20px 0;
+            cursor: pointer;
+
+            
+            &:hover {
+                color: $secondary-color;
+            }
+        }
+    }
+}
