@@ -34,3 +34,16 @@ img {
     max-width: 100%;
 }
 
+.main {
+    min-height: 100vh;
+    margin-top: $header-height;
+    margin-bottom: 2rem;
+
+    @include tablet {
+        margin-top: $header-tablet-height;
+    }
+
+    @include mobile {
+        margin-top: $header-mobile-height;
+    }
+}

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Container } from "@mui/material";
+import Container from "@mui/material/Container";
 
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -8,7 +8,7 @@ import Router from "../router/Router";
 
 const Layout = () => {
     return (
-        <Container sx={{ maxWidth: "1356px !important" }}>
+        <Container sx={{ maxWidth: "1300px !important"}}>
             <Header />
             <Router />
             <Footer />

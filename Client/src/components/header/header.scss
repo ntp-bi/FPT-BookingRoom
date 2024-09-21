@@ -1,0 +1,257 @@
+@use "../../sass/" as *;
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    height: $header-height;
+    background: linear-gradient(-180deg, #ff7e01, #f63);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+
+    @include tablet {
+        height: $header-tablet-height;
+    }
+
+    @include mobile {
+        height: $header-mobile-height;
+    }
+
+    &.shrink {
+        height: $header-shrink-height;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+            rgba(0, 0, 0, 0.23) 0px 6px 6px;
+        z-index: 100;
+
+        @include tablet {
+            height: $header-tablet-height;
+        }
+
+        @include mobile {
+            height: $header-mobile-height;
+        }
+    }
+
+    &__container {
+        margin: 0 auto;
+        max-width: 1300px;
+        @include flex(center, space-between);
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        padding: 0 2.5rem;
+
+        &__logo {
+            width: 9rem;
+            height: 4rem;
+
+            @include tablet {
+                width: 6rem;
+                height: 3rem;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.5));
+            }
+
+            @include mobile {
+                display: none;
+            }
+        }
+
+        &__center {
+            @include flex(center, flex-start);
+
+            @include mobile {
+                flex-direction: column;
+                position: absolute;
+                background: linear-gradient(-180deg, #ff7e01, #f63);
+                z-index: 999;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100vh;
+                justify-content: flex-start;                
+                transform: translateX(-100%);
+                transition: transform 0.5s ease;
+
+                &.active {
+                    transform: translateX(0);
+                }
+            }
+
+            &__mobile {
+                display: none;
+
+                @include mobile {
+                    display: block;
+
+                    svg {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        color: #fff;
+                        cursor: pointer;
+                    }
+                }
+
+                &__close {
+                    display: none;
+
+                    @include mobile {
+                        display: block;
+                        position: absolute;
+                        left: 20px;
+                        top: 14px;
+                        color: #fff;
+
+                        svg {
+                            width: 3rem;
+                            height: 3rem;
+                        }
+                    }
+                }
+            }
+
+            &__item {
+                margin: 0 4rem;
+                font-weight: 600;
+                color: #fff;
+                position: relative;
+
+                @include tablet {
+                    margin: 0 2rem;
+                    font-size: 1.5rem;
+                }
+
+                @include mobile {
+                    margin: 20px 0;
+                }
+
+                &:hover {
+                    color: $header-color;
+                }
+
+                &::after {
+                    content: "";
+                    left: 0;
+                    position: absolute;
+                    background-color: $header-color;
+                    height: 2px;
+                    bottom: -2px;
+                    width: 0;
+                    border-radius: 4px;
+                    transition: 0.4s all linear;
+                }
+
+                &:hover::after {
+                    width: 100%;
+                }
+
+                &.active {
+                    color: $header-color;
+
+                    &::after {
+                        content: "";
+                        left: 0;
+                        position: absolute;
+                        background-color: $header-color;
+                        height: 2px;
+                        bottom: -2px;
+                        width: 100%;
+                        border-radius: 4px;
+                        transition: 0.4s all linear;
+                    }
+                }
+            }
+        }
+
+        &__right {
+            &__login {
+                @include flex(center, flex-start);
+                font-weight: 600;
+                color: #fff;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    margin-left: 1px;
+                    cursor: pointer;
+                }
+
+                &:hover {
+                    color: $header-color;
+                }
+            }
+
+            &__profile {
+                position: relative;
+
+                &__user {
+                    img {
+                        width: 4rem;
+                        height: 4rem;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        cursor: pointer;
+
+                        @include tablet {
+                            width: 3rem;
+                            height: 3rem;
+                        }
+
+                        &:active {
+                            transform: scale(1.2);
+                            transition: 0.4s all linear;
+                        }
+                    }
+                }
+
+                &__item {
+                    position: absolute;
+                    right: -20px;
+                    top: calc(100% + 10px);
+                    min-width: 160px;
+                    max-width: 200px;
+                    border-radius: 4px;
+                    padding: 4px 8px;
+                    background-color: #fff;
+                    box-shadow: 0 1px 3px #e0e0e0;
+                    display: none;
+
+                    &.active {
+                        display: block;
+                    }
+
+                    &::after {
+                        position: absolute;
+                        content: "";
+                        border-style: solid;
+                        border-color: transparent transparent #fff transparent;
+                        border-width: 10px 10px;
+                        top: -18px;
+                        right: 29px;
+                    }
+
+                    li {
+                        font-size: 1.4rem;
+                        padding: 4px;
+                        cursor: pointer;
+                        color: $header-color;
+                        width: 100%;
+
+                        &:hover {
+                            color: $primary-color;
+                            cursor: pointer;
+                            background-color: #fafafa;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

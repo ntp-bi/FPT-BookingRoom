@@ -11,7 +11,7 @@
 }
 
 html {
-    font-size: 62.5%; 
+    font-size: 62.5%;
 }
 
 body {
@@ -23,8 +23,16 @@ body {
 
 .main {
     min-height: 100vh;
-    margin-top: 2rem;
+    margin-top: $header-height;
     margin-bottom: 2rem;
+
+    @include tablet {
+        margin-top: $header-tablet-height;
+    }
+
+    @include mobile {
+        margin-top: $header-mobile-height;
+    }
 }
 
 section {
@@ -53,7 +61,7 @@ ul {
     background: $secondary-color !important;
     border: none !important;
     border-radius: 50px !important;
-    padding: 0.4rem 1.5rem !important;    
+    padding: 0.4rem 1.5rem !important;
 }
 
 .primary__btn a {
