@@ -1,0 +1,25 @@
+@use "../../sass/" as *;
+
+.section-heading {
+    span {
+        background: $secondary-color;
+        font-family: $subtitle-font-name;
+        width: max-content;
+        padding: 0px 1.4rem;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 2.8rem;
+        color: $header-color;
+
+        @include mobile {
+            font-size: 2rem;
+        }
+    }
+
+    h2 {
+        font-size: 3rem;
+        margin-top: 1rem;
+        letter-spacing: 4px;
+        color: $text-color;
+    }
+}
