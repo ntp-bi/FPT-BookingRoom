@@ -12,6 +12,7 @@ import Helmet from "../../components/helmet/Helmet";
 import RoomCard from "../../components/room-card/RoomCard";
 import HeroSlider from "../../components/hero-slider/HeroSlider";
 import SectionHeading from "../../components/section-heading/SectionHeading";
+import MasonryImagesGallery from '../../components/masonry-images-gallery/MasonryImagesGallery';
 
 import { rooms } from "../../data/rooms";
 
@@ -43,27 +44,27 @@ const Home = () => {
                                 breakpoints={{
                                     // Khi màn hình nhỏ hơn 300px
                                     300: {
-                                        slidesPerView: 2, 
-                                        spaceBetween: 10, 
+                                        slidesPerView: 2,
+                                        spaceBetween: 10,
                                     },
                                     // Khi màn hình nhỏ hơn 500px
                                     550: {
-                                        slidesPerView: 2, 
-                                        spaceBetween: 10, 
+                                        slidesPerView: 2,
+                                        spaceBetween: 10,
                                     },
                                     // Khi màn hình nhỏ hơn 640px
                                     640: {
-                                        slidesPerView: 3, 
-                                        spaceBetween: 10, 
+                                        slidesPerView: 3,
+                                        spaceBetween: 10,
                                     },
                                     // Khi màn hình nhỏ hơn 768px
                                     800: {
-                                        slidesPerView: 3, 
+                                        slidesPerView: 3,
                                         spaceBetween: 20,
                                     },
                                     // Khi màn hình nhỏ hơn 1024px
                                     1024: {
-                                        slidesPerView: 4, 
+                                        slidesPerView: 4,
                                         spaceBetween: 30,
                                     },
                                 }}
@@ -79,6 +80,17 @@ const Home = () => {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
+                        </section>
+                        <section className="masonry">
+                            <SectionHeading
+                                subtitle="Collection"
+                                title="Collection of images of classrooms"
+                            />
+                            <Grid container spacing={2}>
+                                <Grid item sx={12} sm={12} md={12} lg={12}>
+                                    <MasonryImagesGallery />
+                                </Grid>
+                            </Grid>
                         </section>
                     </Container>
                 </div>

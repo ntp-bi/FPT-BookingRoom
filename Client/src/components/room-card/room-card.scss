@@ -10,6 +10,12 @@
     margin-top: 2rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
+    &:hover {
+        transform: scale(1.1);
+        transition: 0.2s all linear;
+        border: 2px solid $secondary-color;
+    }
+
     @include tablet {
         height: 334px;
     }

@@ -1,0 +1,17 @@
+@use "../../sass/" as *;
+
+.masonry {
+    @include mobile {
+        display: none;
+    }
+}
+
+.masonry__img {
+    margin-top: 2rem;
+
+    &:hover {
+        transform: scale(1.1);
+        transition: 0.2s all linear;
+        cursor: pointer;
+    }
+}
