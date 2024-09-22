@@ -1,0 +1,47 @@
+@use "../../sass/" as *;
+
+.home {
+    .custom-swiper {
+        min-height: 400px;
+        height: 100%;   
+
+        /* Tùy chỉnh pagination bullets */
+        .swiper-pagination-bullet {
+            width: 6px !important;
+            height: 6px !important;
+            border-radius: 2rem !important;
+            background: #888 !important;
+            opacity: 1 !important;
+        }
+
+        .swiper-pagination-bullet-active {
+            width: 1.5rem !important;
+            background: $secondary-color !important;
+        }
+
+        /* Tùy chỉnh các nút prev/next */
+        .swiper-button-prev,
+        .swiper-button-next {
+            color: $secondary-color;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            width: 4rem;
+            height: 4rem;
+            margin-top: -40px;
+            font-weight: 600;
+        }       
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
+            background-color: $secondary-color;
+            color: #fff;
+        }
+
+        /* Tùy chỉnh kích thước của các nút */
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 1.4rem;           
+        }
+    }
+}
