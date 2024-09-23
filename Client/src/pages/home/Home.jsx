@@ -11,6 +11,7 @@ import { FreeMode, Pagination, Navigation } from "swiper/modules";
 import Helmet from "../../components/helmet/Helmet";
 import RoomCard from "../../components/room-card/RoomCard";
 import HeroSlider from "../../components/hero-slider/HeroSlider";
+import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 import SectionHeading from "../../components/section-heading/SectionHeading";
 import MasonryImagesGallery from '../../components/masonry-images-gallery/MasonryImagesGallery';
 
@@ -92,6 +93,7 @@ const Home = () => {
                                 </Grid>
                             </Grid>
                         </section>
+                        <ScrollToTop/>
                     </Container>
                 </div>
             </div>

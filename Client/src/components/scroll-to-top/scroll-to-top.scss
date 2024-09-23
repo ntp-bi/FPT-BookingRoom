@@ -1,0 +1,37 @@
+@use "../../sass/" as *;
+
+.scroll-to-top {
+    position: fixed !important;
+    bottom: 5rem !important;
+    right: 5rem !important;
+    display: none !important;
+    width: 5rem !important;
+    height: 5rem !important;
+    background: linear-gradient(-180deg, #ff7e01, #f63);
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    @include tablet {
+        width: 4rem !important;
+        height: 4rem !important;
+        right: 3rem !important;
+        bottom: 3rem !important;
+    }
+
+    &.active {
+        display: block !important;
+    }
+
+    .icon {
+        font-size: 2.4rem;
+        color: #fff;
+        position: relative;
+        top: 1px;
+        font-weight: 600;
+
+        @include tablet {
+            font-size: 2rem;
+            position: relative;
+            top: 2px;
+        }
+    }
+}
