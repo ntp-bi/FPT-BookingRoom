@@ -1,0 +1,26 @@
+@use "../../sass/" as *;
+
+.section-common {
+    @include flex(center, center);
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("../../assets/images/fptgallery/fptgallery4.jpg") no-repeat bottom
+            center;
+    background-size: cover;
+    height: 300px;
+    text-align: center;
+
+    @include tablet {
+        height: 200px;
+    }
+
+    @include mobile {
+        height: 150px;
+    }
+
+    h1 {
+        color: $primary-color;
+        letter-spacing: 8px;
+        font-size: 8rem;
+        font-family: $subtitle-font-name;
+    }
+}

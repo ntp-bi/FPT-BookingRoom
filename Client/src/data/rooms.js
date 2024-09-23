@@ -49,4 +49,10 @@ export const rooms = [
         countOfSeats: 100,
         area: 100,
     },
+    {
+        image: image07,
+        roomName: "Phòng họp 08",
+        countOfSeats: 100,
+        area: 100,
+    },
 ];

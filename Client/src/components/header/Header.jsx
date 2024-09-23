@@ -19,7 +19,7 @@ const mainNav = [
     },
     {
         path: `${configPath.reservation}`,
-        display: "Room List",
+        display: "Room",
     },
     {
         path: `${configPath.schedule}`,
