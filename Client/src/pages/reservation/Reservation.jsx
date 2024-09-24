@@ -12,6 +12,7 @@ import {
 
 import Helmet from "../../components/helmet/Helmet";
 import RoomCard from "../../components/room-card/RoomCard";
+import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 import SectionCommon from "../../components/section-common/SectionCommon";
 
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -154,7 +155,7 @@ const Reservation = () => {
                                     {rooms.map((item, index) => (
                                         <Grid
                                             item
-                                            xs={6}
+                                            xs={12}
                                             sm={4}
                                             md={4}
                                             lg={3}
@@ -174,14 +175,14 @@ const Reservation = () => {
                                         <Pagination
                                             count={10}
                                             showFirstButton
-                                            showLastButton
-                                            size="large"
+                                            showLastButton                                        
                                             className="custom-pagination"
                                         />
                                     </Stack>
                                 </Grid>
                             </Grid>
                         </Grid>
+                        <ScrollToTop/>
                     </Container>
                 </div>
             </div>

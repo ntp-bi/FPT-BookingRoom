@@ -144,4 +144,16 @@
             }
         }
     }
+
+    @media (max-width: 899px) {
+        .button__filter {
+            display: block;
+            background-color: $primary-color;
+            letter-spacing: 2px;
+
+            @include mobile {
+                font-size: 0.8rem;
+            }
+        }
+    }
 }

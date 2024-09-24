@@ -7,17 +7,25 @@
     color: $text-color;
     box-shadow: 0 1px 3px #e0e0e0;
 
-
     &__item {
         img {
             width: 156px;
             height: 67px;
             object-fit: cover;
+
+            @include mobile {
+                width: 116px;
+                height: 50px;
+            }
         }
 
         p {
             font-size: 1.5rem;
             margin: 20px 0;
+
+            @include mobile {
+                font-size: 1.2rem;
+            }
         }
 
         &__icons {
@@ -33,6 +41,11 @@
                 &:hover {
                     color: $secondary-color;
                 }
+
+                @include mobile {
+                    width: 1.6rem;
+                    height: 1.6rem;
+                }
             }
         }
     }
@@ -42,16 +55,23 @@
         font-weight: 600;
         color: $header-color;
         margin-bottom: 2rem;
+
+        @include mobile {
+            font-size: 1.4rem;
+        }
     }
 
     &__content {
         li {
-            font-size: 1.5rem;            
+            font-size: 1.5rem;
             line-height: 2rem;
             margin: 20px 0;
             cursor: pointer;
 
-            
+            @include mobile {
+                font-size: 1.2rem;
+            }
+
             &:hover {
                 color: $secondary-color;
             }

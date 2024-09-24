@@ -3,7 +3,7 @@
 .home {
     .custom-swiper {
         min-height: 400px;
-        height: 100%;   
+        height: 100%;
 
         /* Tùy chỉnh pagination bullets */
         .swiper-pagination-bullet {
@@ -30,7 +30,7 @@
             height: 4rem;
             margin-top: -40px;
             font-weight: 600;
-        }       
+        }
 
         .swiper-button-prev:hover,
         .swiper-button-next:hover {
@@ -41,7 +41,11 @@
         /* Tùy chỉnh kích thước của các nút */
         .swiper-button-prev::after,
         .swiper-button-next::after {
-            font-size: 1.4rem;           
+            font-size: 1.4rem;
+        }
+
+        @media (max-width: 422px) {
+            min-height: 376px;
         }
     }
 }

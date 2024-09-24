@@ -13,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
 import Helmet from "../../components/helmet/Helmet";
+import ScrollToTop from '../../components/scroll-to-top/ScrollToTop';
 import SectionCommon from "../../components/section-common/SectionCommon";
 
 import fptgallery1 from "../../assets/images/fptgallery/fptgallery1.jpg";
@@ -159,6 +160,7 @@ const RoomDetail = () => {
                                 </div>
                             </Grid>
                         </Grid>
+                        <ScrollToTop/>
                     </Container>
                 </div>
             </div>

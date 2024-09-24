@@ -15,8 +15,8 @@ import "./footer.scss";
 const Footer = () => {
     return (
         <div className="footer">
-            <Container sx={{ maxWidth: "1300px !important" }}>
-                <Grid container spacing={12}>
+            <Container className="container">
+                <Grid container spacing={2}>
                     <Grid item xs={6} sm={6} md={6} lg={5}>
                         <div className="footer__item">
                             <img src={logo} alt="logo" />
