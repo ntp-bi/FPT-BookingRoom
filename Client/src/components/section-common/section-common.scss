@@ -22,5 +22,9 @@
         letter-spacing: 8px;
         font-size: 8rem;
         font-family: $subtitle-font-name;
+
+        @include mobile {
+            font-size: 6rem;
+        }
     }
 }

@@ -11,8 +11,8 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     &:hover {
-        transform: scale(1.1);
-        transition: 0.2s all linear;
+        transform: translateY(-10px);
+        transition: 0.3s all ease;
         border: 2px solid $secondary-color;
     }
 
@@ -99,8 +99,8 @@
                         font-weight: 600;
                         color: #fff;
                         position: relative;
-                        top: 2px;           
-                        
+                        top: 2px;
+
                         @include tablet {
                             font-size: 0.8rem;
                         }
