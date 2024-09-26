@@ -1,0 +1,74 @@
+@use "../../sass/" as *;
+
+.schedule {
+    &__header {
+        margin: 2rem 0;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+            rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        padding: 2.4rem 2rem;
+
+        &__filter {
+            @include flex(center, space-between);
+
+            .css-nby9nv-MuiStack-root {
+                padding-top: 0;
+            }
+
+            .css-1cprn2g-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+                font-size: 1.3rem;
+                border-radius: 0;
+                height: 40px;
+            }
+
+            .css-nby9nv-MuiStack-root > .MuiTextField-root,
+            .css-nby9nv-MuiStack-root > .MuiPickersTextField-root {
+                min-width: 0;
+                width: 100%;
+            }
+
+            .css-lxfshk-MuiInputBase-root-MuiOutlinedInput-root {
+                font-size: 1.3rem;
+                border-radius: 0;
+                height: 40px;
+                overflow: hidden;
+            }
+
+            .css-j882ge-MuiInputBase-root-MuiOutlinedInput-root {
+                font-size: 1.3rem;
+                border-radius: 0;
+                height: 40px;
+            }
+
+            .css-1q964xs-MuiFormLabel-root-MuiInputLabel-root {
+                font-size: 1.3rem;
+                top: -5px;
+            }
+
+            .css-1u6jos5-MuiSvgIcon-root-MuiSelect-icon {
+                font-size: 2rem;
+            }
+
+            .search {
+                @include flex(center, flex-start);
+
+                .input__search {
+                    width: 100%;
+                    margin-right: 1rem;
+                }
+
+                .MuiButtonBase-root {
+                    margin-left: 8px;
+                }
+
+                &__btn {
+                    background-color: $primary-color;
+
+                    svg {
+                        height: 2.8rem;
+                        font-size: 2.4rem;
+                    }
+                }
+            }
+        }
+    }
+}

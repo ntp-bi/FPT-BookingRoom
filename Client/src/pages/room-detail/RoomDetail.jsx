@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button, Container, Grid } from "@mui/material";
 
 // Import Swiper React components
@@ -12,9 +13,12 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
+import { configPath } from "../../config/configPath";
+
 import Helmet from "../../components/helmet/Helmet";
-import ScrollToTop from '../../components/scroll-to-top/ScrollToTop';
+import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 import SectionCommon from "../../components/section-common/SectionCommon";
+import ModalBookingRoom from "../../components/modal-booking-room/ModalBookingRoom";
 
 import fptgallery1 from "../../assets/images/fptgallery/fptgallery1.jpg";
 import fptgallery2 from "../../assets/images/fptgallery/fptgallery2.jpg";
@@ -148,19 +152,18 @@ const RoomDetail = () => {
                                             variant="contained"
                                             className="btn btn--back"
                                         >
-                                            Trở về
+                                            <Link
+                                                to={`${configPath.reservation}`}
+                                            >
+                                                Trở về
+                                            </Link>
                                         </Button>
-                                        <Button
-                                            variant="contained"
-                                            className="btn btn--book"
-                                        >
-                                            Đặt phòng
-                                        </Button>
+                                        <ModalBookingRoom />
                                     </div>
                                 </div>
                             </Grid>
                         </Grid>
-                        <ScrollToTop/>
+                        <ScrollToTop />
                     </Container>
                 </div>
             </div>

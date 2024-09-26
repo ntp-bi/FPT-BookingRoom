@@ -119,11 +119,11 @@
         }
 
         &__action {
-            float: right;
             margin: 2.4rem 0;
+            @include flex(center, flex-end);
 
             .btn + .btn {
-                margin-left: 2rem;
+                margin-left: 2rem;          
             }
 
             .btn {
@@ -136,11 +136,12 @@
             }
 
             .btn--back {
-                background-color: $text-color;
+                background-color: $text-color;                
             }
 
             .btn--book {
                 background-color: $secondary-color;
+                margin-left: 2rem;
             }
         }
     }

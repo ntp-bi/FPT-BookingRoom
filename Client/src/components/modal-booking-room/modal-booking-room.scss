@@ -1,0 +1,94 @@
+@use "../../sass/" as *;
+
+.modal-booking-room {
+    &__content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 500px;
+        background-color: #fff;
+        box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+        padding: 2rem 2.6rem;
+        border-radius: 4px;
+
+        &__header {
+            @include flex(center, space-between);
+            margin-bottom: 1rem;
+
+            h4 {
+                color: $secondary-color;
+                font-size: 2.1rem;
+                font-weight: 500;
+            }
+
+            .btn--close {
+                font-weight: 600;
+                font-size: 2.6rem !important;
+                cursor: pointer;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+
+        .datetimepicker {
+            margin: 2rem 0;
+        }
+
+        .css-lxfshk-MuiInputBase-root-MuiOutlinedInput-root {
+            font-size: 1.4rem;
+        }
+
+        .css-18pjc51-MuiFormLabel-root-MuiInputLabel-root {
+            font-size: 1.5rem;
+        }
+
+        .css-20bmp1-MuiSvgIcon-root {
+            font-size: 2rem;
+        }
+
+        &__btn {
+            @include flex(center, flex-end);
+            margin: 1rem 0;
+
+            span {
+                position: relative;
+                top: 1px;
+            }
+
+            .btn--back {
+                background-color: #6e7074;
+                font-size: 1.1rem;
+            }
+
+            .btn--book {
+                background-color: $secondary-color;
+                margin-left: 1.4rem;
+                font-size: 1.1rem;
+            }
+        }
+    }
+}
+
+.css-ufcxyz-MuiTypography-root-MuiDayCalendar-weekDayLabel {
+    font-size: 1.4rem !important;
+}
+
+.css-1wy8uaa-MuiButtonBase-root-MuiPickersDay-root {
+    font-size: 1.4rem !important;
+}
+
+.css-1ca0hkk-MuiButtonBase-root-MuiMenuItem-root-MuiMultiSectionDigitalClockSection-item {
+    font-size: 1.3rem !important;
+}
+
+.css-cyfsxc-MuiPickersCalendarHeader-labelContainer {
+    font-size: 1.3rem !important;
+}
+
+.css-1eeiwjo-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
+    font-size: 2rem !important;
+    margin-left: -1rem;
+}

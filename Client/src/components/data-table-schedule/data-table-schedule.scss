@@ -1,0 +1,136 @@
+@use "../../sass/" as *;
+
+.data-table-schedule {
+    font-size: 1.4rem !important;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+    .button--detail {
+        margin-right: 8px;
+    }
+
+    .button--edit {
+        background-color: #2e7d32;
+        margin-right: 8px;
+    }
+
+    .button--checkout {
+        background-color: #d32f2f;
+    }
+
+    .status-label {
+        padding: 8px 10px;
+        border-radius: 4px;
+        font-size: 1.3rem;       
+
+        &.status--confirmed {
+            color: green;
+            background-color: rgba(0, 128, 0, 0.15);
+        }
+
+        &.status--pending {
+            color: goldenrod;
+            background-color: rgba(173, 188, 1, 0.29);
+        }
+    }
+}
+
+.css-4k60b2-MuiDataGrid-root {
+    --unstable_DataGrid-radius: 0px !important;
+}
+
+.css-4k60b2-MuiDataGrid-root .MuiDataGrid-columnHeaderTitleContainer {
+    font-size: 1.5rem !important;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.css-4k60b2-MuiDataGrid-root .MuiDataGrid-container--top [role="row"],
+.css-4k60b2-MuiDataGrid-root .MuiDataGrid-container--bottom [role="row"] {
+    background-color: $secondary-color !important;
+}
+
+.css-4k60b2-MuiDataGrid-root .MuiDataGrid-columnSeparator {
+    color: #fff !important;
+}
+
+.css-levciy-MuiTablePagination-displayedRows {
+    font-size: 1.5rem !important;
+}
+
+.css-1kcqes5-MuiButtonBase-root-MuiIconButton-root {
+    svg {
+        font-size: 2rem !important;
+    }
+}
+
+.css-yiavyu-MuiBackdrop-root-MuiDialog-backdrop {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.css-rsks93-MuiPaper-root-MuiDialog-paper {
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px !important;
+}
+
+.css-ks0ey5-MuiTypography-root-MuiDialogTitle-root {
+    font-size: 2rem !important;
+    color: $secondary-color !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+}
+
+.css-467eqb-MuiTypography-root-MuiDialogContentText-root {
+    font-size: 1.5rem !important;
+    color: $header-color !important;
+}
+
+.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
+    font-size: 1.2rem !important;
+    text-transform: capitalize !important;
+    padding: 5px !important;
+
+    &:nth-child(1) {
+        background-color: #888 !important;
+        color: #fff;
+    }
+
+    &:nth-child(2) {
+        background-color: #1976d2 !important;
+        color: #fff;
+        margin-left: 1.6rem;
+    }
+}
+
+.css-rsks93-MuiPaper-root-MuiDialog-paper {
+    padding: 0 4px 10px;
+    width: 450px;
+}
+
+.css-1cvd0nv-MuiDialog-container {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.css-1h4bzp1-MuiButtonBase-root-MuiMenuItem-root {
+    font-size: 1.4rem !important;
+}
+
+.css-18pjc51-MuiFormLabel-root-MuiInputLabel-root {
+    font-size: 1.6rem !important;
+}
+
+.css-1ixrkmk-MuiTypography-root {
+    font-size: 1.4rem !important;
+}
+
+.css-l4cmsg-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button,
+.css-9pafu0-MuiButtonBase-root-MuiIconButton-root-MuiPickersArrowSwitcher-button {
+    font-size: 2rem !important;
+}
+
+.css-grqin-MuiButtonBase-root-MuiPickersDay-root-MuiDateRangePickerDay-day {
+    font-size: 1.3rem !important;
+}
+
+.css-1y5vrnu-MuiButtonBase-root-MuiCheckbox-root {
+    color: unset !important;
+}
