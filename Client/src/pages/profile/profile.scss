@@ -1,0 +1,79 @@
+@use "../../sass/" as *;
+
+.profile {
+    
+    .wrapper {
+        background: linear-gradient(to top, #ff7e01, #f63);
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+        padding: 2rem 4rem  4rem 2rem;
+        border-radius: 4px;
+        height: 100%;
+    }
+
+    &__left {
+        @include flex(center, center);
+        background-color: #fff;
+        border-radius: 2px;
+        height: 100%;
+        
+        &__image {
+            width: 70%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    
+    &__right {
+        box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+        padding: 2rem 4rem;
+        background-color: #fff;
+        border-radius: 2px;
+        height: 100%;
+
+        &__info {
+            &__name {
+                font-size: 5rem;
+                letter-spacing: 4px;
+                color: $primary-color;
+                font-family: $subtitle-font-name;
+                margin-bottom: 4rem;
+
+                @include tablet {
+                    font-size: 4rem;
+                }
+            }
+
+            &__email, &__account, &__gender {
+                @include flex(center, space-between);
+                margin-bottom: 2.4rem;
+                color: $header-color;
+
+                span {
+                    font-family: $subtitle-font-name;
+                    color: $primary-color;
+                    font-size: 3rem;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        &__btn {
+            float: right;
+            padding-bottom: 2rem;
+
+            &__edit {
+                @include flex(center, flex-start);
+                font-size: 1.2rem !important;
+                font-weight: 600 !important;
+                background-color: $primary-color !important;
+                padding: 6px 10px !important;
+
+                svg {
+                    margin-left: 0.6rem;
+                }
+            }
+        }
+    }
+}
+

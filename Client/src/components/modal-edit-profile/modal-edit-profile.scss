@@ -1,0 +1,26 @@
+@use "../../sass/" as *;
+
+.profile__btn {
+    @include flex(center, flex-end);
+    margin: 1rem 0;
+
+    span {
+        position: relative;
+        top: 1px;
+    }
+
+    .btn--back {
+        background-color: #6e7074;
+        font-size: 1.1rem;
+    }
+
+    .btn--book {
+        background-color: $secondary-color;
+        margin-left: 1.4rem;
+        font-size: 1.1rem;
+    }
+}
+
+.css-15k6ek6-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select {
+    font-size: 1.3rem !important;
+}
