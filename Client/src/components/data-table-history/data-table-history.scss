@@ -1,0 +1,51 @@
+@use "../../sass/" as *;
+
+.data-table-history {
+    font-size: 1.4rem !important;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+
+    .button--detail {
+        margin-right: 8px;
+    }
+
+    .button--edit {
+        background-color: #2e7d32;
+        margin-right: 8px;
+    }
+
+    .button--checkout {
+        background-color: #d32f2f;
+    }
+
+    .status-label {
+        padding: 8px 10px;
+        border-radius: 4px;
+        font-size: 1.3rem;
+
+        &.status--pending {
+            color: goldenrod;
+            background-color: rgba(173, 188, 1, 0.29);
+        }
+
+        &.status--confirmed {
+            color: green;
+            background-color: rgba(0, 128, 0, 0.15);
+        }
+
+        &.status--completed {
+            color: blue;
+            background-color: rgba(0, 0, 255, 0.15);
+        }
+
+        &.status--canceled {
+            color: crimson;
+            background-color: rgba(220, 20, 60, 0.15);
+        }
+
+        &.status--rejected {
+            color: #333;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+    }
+}

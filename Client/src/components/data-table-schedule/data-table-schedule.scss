@@ -21,7 +21,7 @@
     .status-label {
         padding: 8px 10px;
         border-radius: 4px;
-        font-size: 1.3rem;       
+        font-size: 1.3rem;
 
         &.status--confirmed {
             color: green;
@@ -32,6 +32,23 @@
             color: goldenrod;
             background-color: rgba(173, 188, 1, 0.29);
         }
+    }
+}
+
+.dialog__btn {
+    padding: 5px;
+
+    &__close {
+        background-color: #6e7074 !important;
+        color: #fff;
+        font-size: 1.1rem !important;
+    }
+
+    &__confirm {
+        background-color: #1976d2;
+        color: #fff;
+        margin-left: 1.6rem !important;
+        font-size: 1.1rem !important;
     }
 }
 
@@ -84,22 +101,22 @@
     color: $header-color !important;
 }
 
-.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
-    font-size: 1.2rem !important;
-    text-transform: capitalize !important;
-    padding: 5px !important;
+// .css-1apkmlw-MuiButtonBase-root-MuiButton-root {
+//     font-size: 1.2rem !important;
+//     text-transform: capitalize !important;
+//     padding: 5px !important;
 
-    &:nth-child(1) {
-        background-color: #888 !important;
-        color: #fff;
-    }
+//     &:nth-child(1) {
+//         background-color: #888 !important;
+//         color: #fff;
+//     }
 
-    &:nth-child(2) {
-        background-color: #1976d2 !important;
-        color: #fff;
-        margin-left: 1.6rem;
-    }
-}
+//     &:nth-child(2) {
+//         background-color: #1976d2 !important;
+//         color: #fff;
+//         margin-left: 1.6rem;
+//     }
+// }
 
 .css-rsks93-MuiPaper-root-MuiDialog-paper {
     padding: 0 4px 10px;

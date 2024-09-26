@@ -170,11 +170,16 @@ const DataTableSchedule = () => {
                         Bạn có muốn trả phòng này không?
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
-                    <Button variant="contained" onClick={handleCloseCheckout}>
+                <DialogActions className="dialog__btn">
+                    <Button
+                        variant="contained"
+                        onClick={handleCloseCheckout}
+                        className="dialog__btn__close"
+                    >
                         Không
                     </Button>
                     <Button
+                        className="dialog__btn__confirm"
                         variant="contained"
                         onClick={handleCloseCheckout}
                         autoFocus

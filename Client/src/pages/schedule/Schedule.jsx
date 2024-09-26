@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 
 import Helmet from "./../../components/helmet/Helmet";
+import ScrollToTop from '../../components/scroll-to-top/ScrollToTop';
 import SectionCommon from "../../components/section-common/SectionCommon";
 import DataTableSchedule from "../../components/data-table-schedule/DataTableSchedule";
 import SingleInputDateRangePicker from "../../components/single-input-date-range-picker/SingleInputDateRangePicker";
@@ -92,6 +93,7 @@ const Schedule = () => {
                             </Grid>
                         </Grid>
                     </Container>
+                    <ScrollToTop />
                 </div>
             </div>
         </Helmet>
