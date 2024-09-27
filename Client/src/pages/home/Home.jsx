@@ -16,11 +16,29 @@ import SectionHeading from "../../components/section-heading/SectionHeading";
 import MasonryImagesGallery from "../../components/masonry-images-gallery/MasonryImagesGallery";
 
 import { rooms } from "../../data/rooms";
+import { getAllRoom } from "../../api/rooms";
 
 import "swiper/css";
 import "./home.scss";
 
 const Home = () => {
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getAllRoom();
+                setRooms(response);
+
+                return response;
+            } catch (error) {
+                console.log("Error: " + error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <Helmet title="Home">
             <div className="home">
@@ -70,10 +88,12 @@ const Home = () => {
                                     },
                                 }}
                             >
-                                {rooms.map((item, index) => (
-                                    <SwiperSlide key={index}>
+                                {rooms.map((item) => (
+                                    <SwiperSlide key={item.id}>
                                         <RoomCard
-                                            image={item.image}
+                                            image={`${
+                                                import.meta.env.VITE_FILE__URL
+                                            }${item.image}`}
                                             roomName={item.roomName}
                                             countOfSeats={item.countOfSeats}
                                             area={item.area}
