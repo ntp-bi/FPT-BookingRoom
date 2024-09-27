@@ -66,13 +66,11 @@ const Login = () => {
 
             if (response.message === "Login success") {
                 const token = response.data;
-                console.log(token);
-
+               
                 localStorage.setItem("token", token);
 
                 // Giải mã token
-                const decoded = jwtDecode(token);
-                console.log(decoded);
+                const decoded = jwtDecode(token);                
 
                 // Điều hướng dựa trên role
                 if (decoded.roles[0] === "teacher") {
