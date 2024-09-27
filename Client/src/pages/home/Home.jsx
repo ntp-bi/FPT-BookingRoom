@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Grid } from "@mui/material";
 
 import "swiper/css/free-mode";
@@ -13,7 +13,7 @@ import RoomCard from "../../components/room-card/RoomCard";
 import HeroSlider from "../../components/hero-slider/HeroSlider";
 import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 import SectionHeading from "../../components/section-heading/SectionHeading";
-import MasonryImagesGallery from '../../components/masonry-images-gallery/MasonryImagesGallery';
+import MasonryImagesGallery from "../../components/masonry-images-gallery/MasonryImagesGallery";
 
 import { rooms } from "../../data/rooms";
 
@@ -93,7 +93,7 @@ const Home = () => {
                                 </Grid>
                             </Grid>
                         </section>
-                        <ScrollToTop/>
+                        <ScrollToTop />
                     </Container>
                 </div>
             </div>

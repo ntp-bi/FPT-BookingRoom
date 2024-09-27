@@ -120,6 +120,16 @@
                             }
                         }
                     }
+
+                    .error {
+                        position: relative;
+                        top: -14px;
+                        text-align: start;
+                        font-size: 1.3rem;
+                        color: red;
+                        margin-left: 37px;
+                        font-weight: 600;
+                    }
                 }
 
                 .button {

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { configPath } from "../../config/configPath";
 
@@ -33,6 +33,24 @@ const mainNav = [
 
 const Header = () => {
     const [isLogined, setIsLogined] = useState(false);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            setIsLogined(true);
+        } else {
+            setIsLogined(false);
+        }
+    }, [location.pathname]);
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLogined(false);
+        navigate(`${configPath.login}`);
+    };
 
     // SHRINK HEADER
     const headerRef = useRef(null);
@@ -106,7 +124,7 @@ const Header = () => {
                 </ul>
 
                 <div className="header__container__right">
-                    {isLogined ? (
+                    {!isLogined ? (
                         <div className="header__container__right__login">
                             <Link to={`${configPath.login}`}>Login</Link>
                             <LoginIcon />
@@ -135,9 +153,7 @@ const Header = () => {
                                         Change password
                                     </Link>
                                 </li>
-                                <li>
-                                    <Link to="/logout">Logout</Link>
-                                </li>
+                                <li onClick={handleLogout}>Logout</li>
                             </ul>
                         </div>
                     )}

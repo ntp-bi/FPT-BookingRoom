@@ -14,24 +14,42 @@ import History from "../pages/history/History";
 import Profile from "../pages/profile/Profile";
 import Login from "../pages/login/Login";
 
+import ProtectedRouter from "./../protected-router/ProtectedRouter";
+
 const Router = () => {
     return (
         <Routes>
-            <Route path={configPath.home} exact element={<Home />} />
-            <Route path={configPath.reservation} element={<Reservation />} />
-            <Route path={configPath.roomdetail} element={<RoomDetail />} />
+            <Route path={configPath.login} element={<Login />} />
+            <Route path={configPath.home} element={<Home />} />
+            
+            <Route
+                path={configPath.reservation}
+                element={<ProtectedRouter element={<Reservation />} />}
+            />
+            <Route
+                path={configPath.roomdetail}
+                element={<ProtectedRouter element={<RoomDetail />} />}
+            />
             <Route
                 path={configPath.changepassword}
-                element={<ChangePassword />}
+                element={<ProtectedRouter element={<ChangePassword />} />}
             />
-            <Route path={configPath.schedule} element={<Schedule />} />
+            <Route
+                path={configPath.schedule}
+                element={<ProtectedRouter element={<Schedule />} />}
+            />
             <Route
                 path={configPath.scheduledetail}
-                element={<ScheduleDetail />}
+                element={<ProtectedRouter element={<ScheduleDetail />} />}
             />
-            <Route path={configPath.history} element={<History />} />
-            <Route path={configPath.profile} element={<Profile />} />
-            <Route path={configPath.login} element={<Login />} />
+            <Route
+                path={configPath.history}
+                element={<ProtectedRouter element={<History />} />}
+            />
+            <Route
+                path={configPath.profile}
+                element={<ProtectedRouter element={<Profile />} />}
+            />
         </Routes>
     );
 };
