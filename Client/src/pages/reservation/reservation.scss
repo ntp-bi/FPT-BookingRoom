@@ -140,6 +140,11 @@
         display: none;
     }
 
+    .button__filter__clear {
+        background-color: $primary-color;
+        letter-spacing: 2px;
+    }
+
     .filter {
         @media (max-width: 899px) {
             .reservation__category {

@@ -1,17 +1,17 @@
 import api from "./apiConfig";
 
-export const getAllRoom = async (page) => {
+export const getAllRoomType = async () => {
     try {
         const token = localStorage.getItem("token");
 
-        const response = await api.get(`room/both/getallroom?page=${page}`, {
+        const response = await api.get("roomtypes/list", {
             headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
             },
         });
 
-        return response.data.data.data;
+        return response.data.data;
     } catch (error) {
         console.log("Error: " + error);
     }
