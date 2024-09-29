@@ -23,15 +23,13 @@ import "./home.scss";
 
 const Home = () => {
     const [rooms, setRooms] = useState([]);
-    const [page, setPage] = useState(0); // Bắt đầu từ trang 1
-    const [totalPages, setTotalPages] = useState(1); // Tổng số trang
+    const [page, setPage] = useState(1); // Bắt đầu từ trang 1
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await getAllRoom(page);
                 setRooms(response);
-                setTotalPages(response.totalPages);
 
                 return response;
             } catch (error) {

@@ -13,6 +13,8 @@ import {
     MenuItem,
 } from "@mui/material";
 
+import { toast } from "react-toastify";
+
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -21,28 +23,57 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import CloseIcon from "@mui/icons-material/Close";
 import EditIcon from "@mui/icons-material/Edit";
 
+import { updateProfile } from "../../api/profile";
+import { configPath } from "../../config/configPath";
+
 import "./modal-edit-profile.scss";
 
-const ModalEditProfile = () => {
+const ModalEditProfile = ({ profiles, setProfiles }) => {
     const [open, setOpen] = useState(false);
-    const [fullName, setFullName] = useState(""); 
-    const [birthDate, setBirthDate] = useState(dayjs());
-    const [gender, setGender] = useState(""); 
-    const [avatar, setAvatar] = useState(null);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleFullNameChange = (event) => {
-        setFullName(event.target.value);
+    const handleInputChange = (e) => {
+        setProfiles((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
-    const handleGenderChange = (event) => {
-        setGender(event.target.value);
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        setProfiles((prev) => ({ ...prev, photo: file }));
     };
 
-    const handleAvatarChange = (event) => {
-        setAvatar(event.target.files[0]); 
+    const handleDOBChange = (newValue) => {
+        setProfiles((prev) => ({ ...prev, birthDay: newValue }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const update = {
+                fullName: profiles.fullName,
+                birthDay:
+                    profiles.birthDay && dayjs(profiles.birthDay).isValid()
+                        ? dayjs(profiles.birthDay).format("YYYY-MM-DD")
+                        : null,
+                gender: profiles.gender,
+                photo: profiles.photo,
+            };
+
+            const response = await updateProfile(profiles.id, update);
+            setProfiles(response);
+
+            handleClose();
+            toast.success("Cập nhật profile thành công!");
+
+            setTimeout(() => {
+                window.location.href = `${configPath.profile}`;
+            }, 1500);
+        } catch (error) {
+            toast.error("Cập nhật profile thất bại!");
+            console.error(error);
+        }
     };
 
     return (
@@ -78,63 +109,68 @@ const ModalEditProfile = () => {
                             />
                         </div>
 
-                        <Typography id="transition-modal-description" component="div">
-                            {/* Full Name */}
+                        <Typography
+                            id="transition-modal-description"
+                            component="div"
+                        >
                             <FormControl fullWidth margin="normal">
                                 <TextField
-                                    id="outlined-full-name"
+                                    id="fullName"
                                     label="Full Name"
+                                    name="fullName"
+                                    value={profiles?.fullName || ""}
                                     variant="outlined"
-                                    value={fullName}
-                                    onChange={handleFullNameChange}
+                                    onChange={handleInputChange}
                                 />
                             </FormControl>
 
-                            {/* Date of Birth */}
                             <FormControl fullWidth margin="normal">
                                 <LocalizationProvider
                                     dateAdapter={AdapterDayjs}
                                 >
                                     <DatePicker
                                         label="Date of Birth"
-                                        value={birthDate}
-                                        onChange={(newValue) =>
-                                            setBirthDate(newValue)
+                                        value={
+                                            profiles?.birthDay &&
+                                            dayjs(profiles.birthDay).isValid()
+                                                ? dayjs(profiles.birthDay)
+                                                : null
                                         }
+                                        onChange={handleDOBChange}
                                     />
                                 </LocalizationProvider>
                             </FormControl>
 
-                            {/* Gender */}
                             <FormControl fullWidth margin="normal">
                                 <InputLabel id="gender-label">
                                     Gender
                                 </InputLabel>
                                 <Select
                                     labelId="gender-label"
-                                    id="select-gender"
-                                    value={gender}
+                                    id="gender"
                                     label="Gender"
-                                    onChange={handleGenderChange}
+                                    name="gender"
+                                    value={profiles?.gender}
+                                    onChange={handleInputChange}
                                 >
-                                    <MenuItem value="Nam">Nam</MenuItem>
-                                    <MenuItem value="Nữ">Nữ</MenuItem>
-                                    <MenuItem value="Khác">Khác</MenuItem>
+                                    <MenuItem value={true}>Male</MenuItem>
+                                    <MenuItem value={false}>Female</MenuItem>
                                 </Select>
                             </FormControl>
 
-                            {/* Avatar */}
                             <FormControl fullWidth margin="normal">
                                 <TextField
                                     type="file"
                                     label="Upload Avatar"
+                                    onChange={handleFileChange}
+                                    name="photo"
+                                    id="photo"
                                     InputLabelProps={{
                                         shrink: true,
                                     }}
                                     inputProps={{
                                         accept: "image/*",
                                     }}
-                                    onChange={handleAvatarChange}
                                 />
                             </FormControl>
 
@@ -149,6 +185,7 @@ const ModalEditProfile = () => {
                                 <Button
                                     variant="contained"
                                     className="btn--book"
+                                    onClick={handleSubmit}
                                 >
                                     <span>Cập nhật</span>
                                 </Button>

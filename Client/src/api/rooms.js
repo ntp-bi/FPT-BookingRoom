@@ -11,7 +11,7 @@ export const getAllRoom = async (page) => {
             },
         });
 
-        return response.data.data.data;
+        return response.data.data;
     } catch (error) {
         console.log("Error: " + error);
     }

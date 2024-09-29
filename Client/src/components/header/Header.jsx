@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+import { profile } from "../../api/profile";
 import { configPath } from "../../config/configPath";
 
 import logo from "../../assets/images/fpticon.png";
@@ -32,9 +33,26 @@ const mainNav = [
 ];
 
 const Header = () => {
+    const [profiles, setProfiles] = useState([]);
     const [isLogined, setIsLogined] = useState(false);
+
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await profile();
+                setProfiles(response);
+
+                return response;
+            } catch (error) {
+                console.log("Error: " + error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -135,7 +153,12 @@ const Header = () => {
                                 className={`header__container__right__profile__user`}
                                 onClick={menuToggle}
                             >
-                                <img src={avatar} alt="avatar" />
+                                <img
+                                    src={`${import.meta.env.VITE_FILE__URL}${
+                                        profiles.photo
+                                    }`}
+                                    alt="avatar"
+                                />
                             </div>
 
                             <ul

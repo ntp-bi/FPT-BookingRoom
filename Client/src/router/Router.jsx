@@ -20,8 +20,11 @@ const Router = () => {
     return (
         <Routes>
             <Route path={configPath.login} element={<Login />} />
-            <Route path={configPath.home} element={<Home />} />
-            
+
+            <Route
+                path={configPath.home}
+                element={<ProtectedRouter element={<Home />} />}
+            />
             <Route
                 path={configPath.reservation}
                 element={<ProtectedRouter element={<Reservation />} />}
