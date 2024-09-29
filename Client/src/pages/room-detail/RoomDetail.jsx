@@ -54,7 +54,7 @@ const RoomDetail = () => {
     }, []);
 
     return (
-        <Helmet title="Room Detail">
+        <Helmet title={`${room?.roomName}`}>
             <div className="room-detail">
                 <div className="main">
                     <Container className="container">
@@ -199,7 +199,10 @@ const RoomDetail = () => {
                                                 Trở về
                                             </Link>
                                         </Button>
-                                        <ModalBookingRoom />
+                                        <ModalBookingRoom
+                                            roomId={room?.id}
+                                            status={room?.status}
+                                        />
                                     </div>
                                 </div>
                             </Grid>

@@ -35,6 +35,7 @@
 
         .datetimepicker {
             margin: 2rem 0;
+            width: 100%;
         }
 
         .css-lxfshk-MuiInputBase-root-MuiOutlinedInput-root {
@@ -91,4 +92,8 @@
 .css-1eeiwjo-MuiSvgIcon-root-MuiPickersCalendarHeader-switchViewIcon{
     font-size: 2rem !important;
     margin-left: -1rem;
+}
+
+.css-1apkmlw-MuiButtonBase-root-MuiButton-root {
+    font-size: 1.4rem !important;
 }
