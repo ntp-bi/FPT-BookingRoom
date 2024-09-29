@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { Button, Container, Grid } from "@mui/material";
 
 // Import Swiper React components
@@ -20,15 +20,38 @@ import ScrollToTop from "../../components/scroll-to-top/ScrollToTop";
 import SectionCommon from "../../components/section-common/SectionCommon";
 import ModalBookingRoom from "../../components/modal-booking-room/ModalBookingRoom";
 
+import { getRoomById } from "../../api/rooms";
+
 import fptgallery1 from "../../assets/images/fptgallery/fptgallery1.jpg";
 import fptgallery2 from "../../assets/images/fptgallery/fptgallery2.jpg";
-import fptgallery3 from "../../assets/images/fptgallery/fptgallery3.jpg";
-import fptgallery4 from "../../assets/images/fptgallery/fptgallery4.jpg";
+import fptgallery3 from "../../assets/images/fptgallery/fptgallery7.jpg";
 
 import "./room-detail.scss";
 
 const RoomDetail = () => {
+    const { id } = useParams();
+    const [room, setRoom] = useState([]);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+    const STATUS_ROOM = {
+        1: "Đang sửa chữa",
+        2: "Phòng trống",
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getRoomById(id);
+                setRoom(response);
+
+                return response;
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     return (
         <Helmet title="Room Detail">
@@ -53,6 +76,15 @@ const RoomDetail = () => {
                                     >
                                         <SwiperSlide>
                                             <img
+                                                src={`${
+                                                    import.meta.env
+                                                        .VITE_FILE__URL
+                                                }${room?.image}`}
+                                                alt="image"
+                                            />
+                                        </SwiperSlide>
+                                        <SwiperSlide>
+                                            <img
                                                 src={fptgallery1}
                                                 alt="image"
                                             />
@@ -60,18 +92,12 @@ const RoomDetail = () => {
                                         <SwiperSlide>
                                             <img
                                                 src={fptgallery2}
-                                                alt="image"
-                                            />
-                                        </SwiperSlide>
-                                        <SwiperSlide>
-                                            <img
-                                                src={fptgallery3}
                                                 alt="thumbnail"
                                             />
                                         </SwiperSlide>
                                         <SwiperSlide>
                                             <img
-                                                src={fptgallery4}
+                                                src={fptgallery3}
                                                 alt="thumbnail"
                                             />
                                         </SwiperSlide>
@@ -89,6 +115,15 @@ const RoomDetail = () => {
                                     >
                                         <SwiperSlide>
                                             <img
+                                                src={`${
+                                                    import.meta.env
+                                                        .VITE_FILE__URL
+                                                }${room?.image}`}
+                                                alt="thumbnail"
+                                            />
+                                        </SwiperSlide>
+                                        <SwiperSlide>
+                                            <img
                                                 src={fptgallery1}
                                                 alt="thumbnail"
                                             />
@@ -105,46 +140,52 @@ const RoomDetail = () => {
                                                 alt="thumbnail"
                                             />
                                         </SwiperSlide>
-                                        <SwiperSlide>
-                                            <img
-                                                src={fptgallery4}
-                                                alt="thumbnail"
-                                            />
-                                        </SwiperSlide>
                                     </Swiper>
                                 </div>
                             </Grid>
                             <Grid item xs={0} sm={0} md={6} lg={5}>
                                 <div className="room-detail__right">
                                     <h2 className="room-detail__right__title">
-                                        Phòng họp 01
+                                        {room?.roomName}
                                     </h2>
 
                                     <div className="room-detail__right__count">
+                                        <span>Loại phòng:</span>
+                                        <span className="highlight">
+                                            {room?.typeName}
+                                        </span>
+                                    </div>
+                                    <hr />
+
+                                    <div className="room-detail__right__count">
+                                        <span>Trạng thái:</span>
+                                        <span className="highlight">
+                                            {room?.status === 1
+                                                ? STATUS_ROOM[1]
+                                                : STATUS_ROOM[2]}
+                                        </span>
+                                    </div>
+                                    <hr />
+
+                                    <div className="room-detail__right__count">
                                         <span>Số lượng chỗ ngồi:</span>
-                                        <span className="highlight">100</span>
+                                        <span className="highlight">
+                                            {room?.countOfSeats}
+                                        </span>
                                     </div>
                                     <hr />
 
                                     <div className="room-detail__right__area">
                                         <span>Diện tích:</span>
                                         <span className="highlight">
-                                            100m<sup>2</sup>
+                                            {room?.area}m<sup>2</sup>
                                         </span>
                                     </div>
                                     <hr />
 
                                     <div className="room-detail__right__desc">
                                         <span>Mô tả:</span>
-                                        <span>
-                                            Lorem ipsum dolor sit amet
-                                            consectetur adipisicing elit.
-                                            Dolores atque obcaecati alias fugit
-                                            aliquid temporibus expedita eius
-                                            aperiam similique pariatur? At rerum
-                                            sint sunt asperiores nesciunt amet
-                                            dolorem, porro commodi!
-                                        </span>
+                                        <span>{room?.description}</span>
                                     </div>
                                     <hr />
                                     <div className="room-detail__right__action">

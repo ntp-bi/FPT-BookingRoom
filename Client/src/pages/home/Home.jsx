@@ -23,13 +23,13 @@ import "./home.scss";
 
 const Home = () => {
     const [rooms, setRooms] = useState([]);
-    const [page, setPage] = useState(1); // Bắt đầu từ trang 1
+    const [page, setPage] = useState(1); 
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 const response = await getAllRoom(page);
-                setRooms(response);
+                setRooms(response.data);
 
                 return response;
             } catch (error) {
@@ -92,9 +92,11 @@ const Home = () => {
                                 {rooms.map((item) => (
                                     <SwiperSlide key={item.id}>
                                         <RoomCard
+                                            id={item.id}
                                             image={`${
                                                 import.meta.env.VITE_FILE__URL
                                             }${item.image}`}
+                                            status={item.status}
                                             roomName={item.roomName}
                                             countOfSeats={item.countOfSeats}
                                             area={item.area}

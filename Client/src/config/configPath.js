@@ -1,7 +1,7 @@
 export const configPath = {
     home: "/",
-    reservation: "/reservation",
-    roomdetail: "/rooms/:id",
+    reservation: "/rooms",
+    roomdetail: "/room/:id",
     changepassword: "/changepassword",
     schedule: "/schedule",
     scheduledetail: "/schedule/:id",

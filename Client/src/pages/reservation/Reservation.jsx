@@ -29,17 +29,19 @@ const Reservation = () => {
     const [filteredRooms, setFilteredRooms] = useState([]);
     const [selectedRoomTypes, setSelectedRoomTypes] = useState([]);
 
-    const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(10);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+
     const [loadingRooms, setLoadingRooms] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             setLoadingRooms(true);
             try {
-                const response = await getAllRoom(page);
-                setRooms(response || []); 
-                setTotalPages(response.totalPages || 1);
+                const response = await getAllRoom(currentPage);
+                setRooms(response.data || []);
+                setFilteredRooms(response.data || []);
+                setTotalPages(response.pageCount || 1);
             } catch (error) {
                 console.log("Error: " + error);
             } finally {
@@ -48,7 +50,7 @@ const Reservation = () => {
         };
 
         fetchData();
-    }, [page]);
+    }, [currentPage]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -74,6 +76,13 @@ const Reservation = () => {
         }
     }, [selectedRoomTypes, rooms]);
 
+    const handlePageChange = (event, value) => {
+        event.preventDefault();
+        if (value <= totalPages) {
+            setCurrentPage(value);
+        }
+    };
+
     const handleRoomTypeChange = (e) => {
         const value = e.target.name;
 
@@ -84,10 +93,6 @@ const Reservation = () => {
                 return [...selectedRoomTypes, value];
             }
         });
-    };
-
-    const handlePageChange = (event, value) => {
-        setPage(value);
     };
 
     const filterRef = useRef(null);
@@ -167,7 +172,7 @@ const Reservation = () => {
                                 </Button>
                                 <Grid container spacing={2}>
                                     {loadingRooms
-                                        ? rooms.map((_, index) => (
+                                        ? [...Array(8)].map((_, index) => (
                                               <Grid
                                                   item
                                                   xs={12}
@@ -189,10 +194,12 @@ const Reservation = () => {
                                                   key={item.id}
                                               >
                                                   <RoomCard
+                                                      id={item.id}
                                                       image={`${
                                                           import.meta.env
                                                               .VITE_FILE__URL
                                                       }${item.image}`}
+                                                      status={item.status}
                                                       roomName={item.roomName}
                                                       countOfSeats={
                                                           item.countOfSeats
@@ -206,8 +213,8 @@ const Reservation = () => {
                                 <Grid container>
                                     <Stack spacing={2}>
                                         <Pagination
+                                            page={currentPage}
                                             count={totalPages}
-                                            page={page}
                                             onChange={handlePageChange}
                                             showFirstButton
                                             showLastButton
