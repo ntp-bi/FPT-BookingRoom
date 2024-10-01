@@ -11,73 +11,87 @@ import {
 import { DataGrid } from "@mui/x-data-grid";
 import ModalUpdateBookingRoom from "../modal-update-booking-room/ModalUpdateBookingRoom";
 
+import { toast } from "react-toastify";
+import { cancelSchedule, returnSchedule } from "../../api/schedule";
+
 import "./data-table-schedule.scss";
 
-const DataTableSchedule = () => {
+const DataTableSchedule = ({ schedule }) => {
+    const [selectedRoom, setSelectedRoom] = useState(null);
     const [openCheckout, setOpenCheckout] = useState(false);
     const [openUpdate, setOpenUpdate] = useState(false);
+    const [roomToReturn, setRoomToReturn] = useState(null);
 
-    const handleOpenUpdate = () => setOpenUpdate(true);
+    const handleOpenUpdate = (room) => {
+        setSelectedRoom(room);
+        setOpenUpdate(true);
+    };
+
     const handleCloseUpdate = () => setOpenUpdate(false);
 
-    const handleOpenCheckout = () => {
+    const handleOpenCheckout = (room) => {
+        setRoomToReturn(room); 
         setOpenCheckout(true);
     };
 
     const handleCloseCheckout = () => {
         setOpenCheckout(false);
+        setRoomToReturn(null);
     };
 
-    const rows = [
-        {
-            id: 1,
-            stt: 1,
-            roomName: "Phòng 101",
-            bookingTime: "2024-09-24 10:00",
-            returnTime: "2024-09-24 12:00",
-            status: "Chờ xác nhận",
-        },
-        {
-            id: 2,
-            stt: 2,
-            roomName: "Phòng 102",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Đã xác nhận",
-        },
-        {
-            id: 3,
-            stt: 3,
-            roomName: "Phòng 103",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Chờ xác nhận",
-        },
-        {
-            id: 4,
-            stt: 4,
-            roomName: "Phòng 104",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Đã xác nhận",
-        },
-        {
-            id: 5,
-            stt: 5,
-            roomName: "Phòng 105",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Chờ xác nhận",
-        },
-        {
-            id: 6,
-            stt: 6,
-            roomName: "Phòng 106",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Đã xác nhận",
-        },
-    ];
+    const STATUS_SCHEDULE = {
+        1: "Chờ xác nhận",
+        2: "Đã xác nhận",
+    };
+
+    const handleCancel = async (row) => {
+        const confirmCancel = window.confirm(
+            "Bạn có chắc chắn muốn hủy đặt phòng này không?"
+        );
+
+        if (confirmCancel) {
+            const response = await cancelSchedule(row.id);
+
+            if (response) {
+                toast.success("Huỷ đặt phòng thành công!");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                toast.error("Huỷ đặt phòng thất bại!");
+            }
+        } else {
+            toast.info("Huỷ đặt phòng đã bị hủy!");
+        }
+    };
+
+    const handleReturn = async () => {
+        if (roomToReturn) {
+            const response = await returnSchedule(roomToReturn.id);
+
+            if (response) {
+                toast.success("Trả phòng thành công!");
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            } else {
+                toast.error("Trả phòng thất bại!");
+            }
+        }
+        handleCloseCheckout();
+    };
+
+    const rows =
+        schedule?.length > 0
+            ? schedule.map((item, index) => ({
+                  stt: index + 1,
+                  id: item.detailId,
+                  roomName: item.roomName,
+                  bookingTime: item.reserveTime,
+                  returnTime: item.endTime,
+                  status: STATUS_SCHEDULE[item.status],
+              }))
+            : [];
 
     const columns = [
         { field: "stt", headerName: "STT", width: 50 },
@@ -91,7 +105,7 @@ const DataTableSchedule = () => {
             renderCell: (params) => (
                 <span
                     className={`status-label ${
-                        params.value === "Đã xác nhận"
+                        params.value === STATUS_SCHEDULE[2]
                             ? "status--confirmed"
                             : "status--pending"
                     }`}
@@ -116,17 +130,27 @@ const DataTableSchedule = () => {
                     <Button
                         className="button--edit"
                         variant="contained"
-                        onClick={handleOpenUpdate}
+                        onClick={() => handleOpenUpdate(params.row)}
                     >
                         Cập nhật
                     </Button>
-                    <Button
-                        className="button--checkout"
-                        variant="contained"
-                        onClick={handleOpenCheckout}
-                    >
-                        Trả phòng
-                    </Button>
+                    {params.row.status === STATUS_SCHEDULE[1] ? (
+                        <Button
+                            className="button--cancel"
+                            variant="contained"
+                            onClick={() => handleCancel(params.row)}
+                        >
+                            Huỷ
+                        </Button>
+                    ) : (
+                        <Button
+                            className="button--checkout"
+                            variant="contained"
+                            onClick={() => handleOpenCheckout(params.row)} 
+                        >
+                            Trả phòng
+                        </Button>
+                    )}
                 </div>
             ),
         },
@@ -137,6 +161,7 @@ const DataTableSchedule = () => {
             <DataGrid
                 rows={rows}
                 columns={columns}
+                getRowId={(row) => row.stt}
                 initialState={{
                     pagination: {
                         paginationModel: {
@@ -149,14 +174,12 @@ const DataTableSchedule = () => {
                 disableRowSelectionOnClick
                 className="data-table-schedule"
             />
-
             {/* Modal for Updating Booking Room */}
             <ModalUpdateBookingRoom
                 open={openUpdate}
-                handleOpen={handleOpenUpdate}
+                selectedRoom={selectedRoom}
                 handleClose={handleCloseUpdate}
             />
-
             {/* Dialog for Checkout */}
             <Dialog
                 open={openCheckout}
@@ -181,7 +204,7 @@ const DataTableSchedule = () => {
                     <Button
                         className="dialog__btn__confirm"
                         variant="contained"
-                        onClick={handleCloseCheckout}
+                        onClick={handleReturn} 
                         autoFocus
                     >
                         Có

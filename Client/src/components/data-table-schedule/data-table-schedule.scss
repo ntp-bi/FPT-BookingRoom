@@ -14,8 +14,13 @@
         margin-right: 8px;
     }
 
-    .button--checkout {
+    .button--cancel {
         background-color: #d32f2f;
+        width: 87px;
+    }
+
+    .button--checkout {
+        background-color: $secondary-color;
     }
 
     .status-label {
