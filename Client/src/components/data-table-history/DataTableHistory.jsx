@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 
 import "./data-table-history.scss";
 
-const DataTableHistory = () => {
+const DataTableHistory = ({ history }) => {
     const STATUS_HISTORY = {
         1: "Chờ xác nhận",
         2: "Đã xác nhận",
@@ -30,56 +30,17 @@ const DataTableHistory = () => {
         }
     };
 
-    const rows = [
-        {
-            id: 1,
-            stt: 1,
-            roomName: "Phòng 101",
-            bookingTime: "2024-09-24 10:00",
-            returnTime: "2024-09-24 12:00",
-            status: "Chờ xác nhận",
-        },
-        {
-            id: 2,
-            stt: 2,
-            roomName: "Phòng 102",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Đã xác nhận",
-        },
-        {
-            id: 3,
-            stt: 3,
-            roomName: "Phòng 103",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Hoàn thành",
-        },
-        {
-            id: 4,
-            stt: 4,
-            roomName: "Phòng 104",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Đã hủy",
-        },
-        {
-            id: 5,
-            stt: 5,
-            roomName: "Phòng 105",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Từ chối",
-        },
-        {
-            id: 6,
-            stt: 6,
-            roomName: "Phòng 106",
-            bookingTime: "2024-09-24 11:00",
-            returnTime: "2024-09-24 13:00",
-            status: "Đã xác nhận",
-        },
-    ];
+    const rows =
+        history?.length > 0
+            ? history.map((item, index) => ({
+                  stt: index + 1,
+                  id: item.id,
+                  roomName: item.roomName,
+                  bookingTime: item.reserveTime,
+                  returnTime: item.endTime,
+                  status: STATUS_HISTORY[item.status],
+              }))
+            : [];
 
     const columns = [
         { field: "stt", headerName: "STT", width: 100 },
