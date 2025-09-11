@@ -1,9 +1,12 @@
 import React from 'react'
+import Routers from './router/Router';
 import "./App.scss"
 
 const App = () => {
   return (
-    <div>App Admin</div>
+    <div>
+      <Routers />
+    </div>
   )
 }
 

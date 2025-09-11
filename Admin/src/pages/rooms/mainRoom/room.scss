@@ -1,0 +1,317 @@
+.room {
+    display: flex;
+    background-color: #f5f5f5;
+    color: #616161;
+
+    .roomContainer {
+        flex: 6;
+        background-color: #f5f5f5;
+        color: #616161;
+
+        .roomList {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 20px;
+            margin: 20px;
+            border-top: 3px solid #31b0d5;
+            border-radius: 4px;
+
+            .datatableTitle {
+                width: 100%;
+                font-size: 24px;
+                color: #210876;
+                margin-bottom: 10px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .roomSearch {
+                display: flex;
+                align-items: center;
+                margin: 18px 0px 30px;
+
+                .select {
+                    outline: none;
+                    border: 1px solid #616161;
+                    padding: 4px 10px;
+                    width: 20%;
+                    margin-right: 10px;
+                    font-size: 15px;
+                    height: 34px;
+                    cursor: pointer;
+                    color: #616161;
+                    border-radius: 2px;
+                    outline: none;
+                    background-color: #fff;
+                }
+
+                .select + .select {
+                    margin-left: 10px;
+                }
+
+                .search input:focus {
+                    border: 2px solid #000;
+                    height: 29px;
+                }
+
+                .select option {
+                    background-color: #fff;
+                    color: #000;
+                }
+
+                .select option:checked {
+                    background-color: #31b0d5;
+                    color: #fff;
+                }
+
+                .search {
+                    display: flex;
+                    align-items: center;
+                    width: 46%;
+                    position: relative;
+
+                    input {
+                        border: 1px solid #616161;
+                        padding: 2px 10px;
+                        width: 100%;
+                        font-size: 15px;
+                        outline: none;
+                        height: 30px;
+                        margin-left: 10px;
+                        border-top-left-radius: 2px;
+                        border-bottom-left-radius: 2px;
+
+                        &::placeholder {
+                            font-size: 15px;
+                        }
+                        &:focus {
+                            border: 2px solid #000;
+                            height: 29px;
+                        }
+                    }
+
+                    .search-btn {
+                        position: relative;
+                        top: 2px;
+                        border: none;
+
+                        .MuiSvgIcon-root {
+                            background-color: #31b0d5 !important;
+                            font-size: 20px;
+                            padding: 1px 10px;
+                            height: 34px;
+                            color: #fff !important;
+                            cursor: pointer;
+                            transition: background-color 0.3s ease;
+                            border-bottom-right-radius: 2px;
+                            border-top-right-radius: 2px;
+
+                            &:hover {
+                                background-color: #1a7a8c !important;
+                            }
+                        }
+                    }
+                    .icon-search {
+                        font-size: 19px;
+                    }
+
+                    .clear {
+                        border: none;
+                        background-color: transparent;
+                        cursor: pointer;
+                    }
+
+                    .clear,
+                    .loading {
+                        position: absolute;
+                        right: 50px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        color: #616161;
+                        margin-top: 2px;
+                    }
+
+                    .loading {
+                        animation: spinner 0.8s linear infinite;
+                    }
+
+                    @keyframes spinner {
+                        from {
+                            transform: translateY(-50%) rotate(0);
+                        }
+                        to {
+                            transform: translateY(-50%) rotate(360deg);
+                        }
+                    }
+                }
+            }
+            .link {
+                color: green;
+                font-size: 16px;
+                font-weight: 400;
+                border: 1px dotted green;
+                padding: 5px 8px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-left: 38px;
+                transition: background-color 0.3s linear;
+
+                &:hover {
+                    background-color: #d0e3d0;
+                }
+            }
+            .roomtable {
+                color: #616161;
+
+                .tableCell {
+                    background-color: whitesmoke;
+                    color: #616161;
+                    font-size: 15px;
+
+                    .cellWrapper {
+                        display: flex;
+                        align-items: center;
+
+                        .image {
+                            width: 100px;
+                            height: 100px;
+                            object-fit: cover;
+                            border: 1px dotted #31b0d5;
+                            border-radius: 4px;
+                            margin-right: 10px;
+                        }
+                    }
+
+                    span {
+                        background-color: #210876;
+                        color: white;
+                        padding: 5px 10px;
+                        cursor: pointer;
+                    }
+
+                    .select {
+                        padding: 5px;
+                        border-radius: 5px;
+                    }
+
+                    .option {
+                        padding: 5px;
+                        border-radius: 5px;
+                    }
+
+                    .option.Empty {
+                        color: gray;
+                        background-color: #f0f0f0; 
+                    }
+
+                    .status {
+                        padding: 5px;
+                        border-radius: 5px;
+
+                        &.Booked {
+                            color: crimson;
+                            background-color: rgb(246, 233, 233);
+                        }
+
+                        &.Available {
+                            color: green;
+                            background-color: rgba(0, 128, 0, 0.15);
+                        }
+                        &.Broken {
+                            color: goldenrod;
+                            background-color: rgba(173, 188, 1, 0.29);
+                        }
+                    }
+
+                    .btn + .btn {
+                        margin-left: 10px;
+                    }
+
+                    .updateBtn {
+                        padding: 4px 8px;
+                        border-radius: 5px;
+                        color: #31b0d5;
+                        border: 1px dotted #31b0d5;
+                        cursor: pointer;
+                        font-size: 15px;
+                        font-weight: 600;
+
+                        transition: background-color 0.3s linear;
+
+                        &:hover {
+                            background-color: #d2edf9;
+                        }
+                    }
+
+                    .deleteBtn {
+                        padding: 4px 8px;
+                        border-radius: 5px;
+                        color: crimson;
+                        border: 1px dotted rgba(220, 20, 60, 0.6);
+                        cursor: pointer;
+                        font-size: 15px;
+                        font-weight: 600;
+                        transition: background-color 0.3s linear;
+
+                        &:hover {
+                            background-color: rgb(246, 233, 233);
+                        }
+                    }
+
+                    .detailBtn {
+                        padding: 4px 8px;
+                        border-radius: 5px;
+                        color: goldenrod;
+                        border: 1px dotted goldenrod;
+                        cursor: pointer;
+                        font-size: 15px;
+                        font-weight: 600;
+                        transition: background-color 0.3s linear;
+
+                        &:hover {
+                            background-color: #e0e5ae;
+                        }
+                    }
+                }
+
+                .tabble-header {
+                    font-weight: 600;
+                    color: #210876;
+                    font-size: 16px;
+                }
+
+                .pagination {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 20px;
+                }
+
+                .btn-action {
+                    text-align: end !important;
+                }
+
+                .name-room {
+                    width: 31%;
+                }
+
+                .type-room {
+                    width: 16%;
+                }
+
+                .no-data-message {
+                    font-size: 20px;
+                    color: #210876;
+                    font-weight: 600;
+                    padding: 20px 10px;
+
+                    .no-mess {
+                        color: red;
+                    }
+                }
+            }
+        }
+    }
+}

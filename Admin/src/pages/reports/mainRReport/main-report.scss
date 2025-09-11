@@ -1,0 +1,171 @@
+.report {
+    display: flex;
+    background-color: #f5f5f5;
+    color: #616161;
+
+    .reportContainer {
+        flex: 6;
+        background-color: #f5f5f5;
+        color: #616161;
+
+        .reportList {
+            -webkit-box-shadow: 2px 4px 10px 1px rgba(0, 0, 0, 0.47);
+            box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+            padding: 20px;
+            margin: 20px;
+            border-radius: 4px;
+            border-top: 3px solid #31b0d5;
+
+            .datatableTitle {
+                width: 100%;
+                font-size: 24px;
+                color: #210876;
+                margin-bottom: 10px;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .second {
+                padding: 20px 0;
+            }
+
+            .reportSearch {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: 18px 0px 30px;
+
+                .select {
+                    outline: none;
+                    border: 1px solid #000;
+                    padding: 4px 10px;
+                    width: 25%;
+                    margin-right: 10px;
+                    font-size: 15px;
+                    height: 34px;
+                    cursor: pointer;
+                    color: #616161;
+                    border-radius: 2px;
+                }
+
+                .btn {
+                    background-color: #31b0d5;
+                    font-size: 16px;
+                    padding: 1px 10px;
+                    font-weight: 600;
+                    height: 34px;
+                    color: #fff;
+                    cursor: pointer;
+                    border: none;
+                    transition: background-color 0.3s ease;
+                    border-radius: 4px;
+
+                    &:hover {
+                        background-color: #1a7a8c;
+                    }
+                }
+
+                .excel {
+                    background-color: #28a745;
+
+                    &:hover {
+                        background-color: #218838;
+                    }
+                }
+            }
+        }
+        .reporttable {
+            color: #616161;
+
+            .tableCell {
+                background-color: whitesmoke;
+                color: #616161;
+                font-size: 15px;
+                text-align: center;
+
+                .cellWrapper {
+                    display: flex;
+                    align-items: center;
+
+                    .image {
+                        width: 100px;
+                        height: 100px;
+                        object-fit: cover;
+                        border: 1px dotted #31b0d5;
+                        border-radius: 4px;
+                        margin-right: 10px;
+                    }
+                }
+
+                span {
+                    background-color: #210876;
+                    color: white;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                }
+
+                .btn + .btn {
+                    margin-left: 10px;
+                }
+            }
+
+            .name-room {
+                text-align: start;
+                // width: 20%;
+            }
+
+            .room-type {
+                text-align: start;
+                width: 15%;
+            }
+
+            .count-reserve {
+                width: 12%;
+            }
+
+            .count-canle {
+                width: 12%;
+            }
+
+            .count-event {
+                width: 15%;
+            }
+
+            .count-teacher {
+                width: 15%;
+            }
+
+            .tabble-header {
+                font-weight: 600;
+                color: #210876;
+                font-size: 16px;
+                text-align: center;
+            }
+
+            .header-start {
+                text-align: start;
+            }
+
+            .header-img {
+                width: 15%;
+            }
+
+            .most-room {
+                width: 30%;
+            }
+
+            .pagination {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 20px;
+            }
+
+            .btn-action {
+                text-align: end !important;
+            }
+        }
+    }
+}

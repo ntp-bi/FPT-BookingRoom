@@ -1,0 +1,116 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #FAA935 !important;
+
+    .login__container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+        width: 66.66666667%;
+        height: 70%;
+        background-color: #fff;
+        border-radius: 10px;
+
+        .login__img {
+            width: 60%;
+            text-align: center;
+
+            img {
+                width: 70%;
+                object-fit: contain;
+            }
+        }
+
+        .login__form {
+            padding: 50px;
+            background: #faa935;
+            position: relative;
+            border-radius: 4px;
+            .user {
+                width: 80px;
+                height: 80px;
+                position: absolute;
+                top: -9%;
+                left: 50%;
+                transform: translate(-50%, -9%);
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            h2 {
+                color: #fff;
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+
+            .form__input {
+                margin-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                input {
+                    width: 100%;
+                    padding: 0.5rem 1rem;
+                    border-radius: 5px;
+                    border: none;
+                    font-size: 1rem;
+                    color: #0b2727;
+                    background-color: #fff;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+
+            .auth__btn {
+                background: #0b2727 !important;
+                width: 100%;
+                color: #fff !important;
+                border-radius: 10px;
+                padding: 10px 0;
+                cursor: pointer;
+                transform: scale(1);
+                transition: transform ease 0.3s;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+
+            p {
+                font-size: 0.9rem;
+                color: #fff;
+                margin-top: 1.5rem;   
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+
+                a {
+                    color: #0b2727;
+                    text-decoration: none;
+                    margin-left: 5px;
+                    font-weight: 500;
+                    
+                    &:hover {
+                        color: #fff;
+                    }
+                }
+            }
+
+            .error {
+                color: red;
+                font-size: 14px;
+                position: relative;
+                top: -12px;
+            }
+        }
+    }
+}

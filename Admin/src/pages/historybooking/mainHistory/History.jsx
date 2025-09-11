@@ -1,0 +1,375 @@
+import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import Sidebar from "../../../components/sidebar/Sidebar";
+import Navbar from "../../../components/navbar/Navbar";
+import useDebounce from "../../../components/hooks/useDebounce";
+
+import dayjs from "dayjs";
+import "dayjs/locale/vi";
+
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
+import { SingleInputDateRangeField } from "@mui/x-date-pickers-pro/SingleInputDateRangeField";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { format } from "date-fns";
+
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+import Pagination from "@mui/material/Pagination";
+
+import CancelIcon from "@mui/icons-material/Cancel";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import RotateRightOutlinedIcon from "@mui/icons-material/RotateRightOutlined";
+
+import * as api from "../../../api/ApiHistories";
+
+import "./main-history.scss";
+
+dayjs.locale("vi"); // Set locale to Vietnamese
+
+const History = () => {
+    const [histories, setHistories] = useState([]);
+    const [selectedStatus, setSelectedStatus] = useState(0);
+    const [search, setSearch] = useState("");
+    const [isLoading, setIsLoading] = useState(false); // State loading tải dữ liệu khi searchValue
+    const [loadingSearch, setLoadingSearch] = useState(false); // State loading tải dữ liệu khi searchValue
+    const [filteredRows, setFilteredRows] = useState([]); // State lưu trữ dữ liệu đã lọc
+    const [selectedDateRange, setSelectedDateRange] = useState([null, null]);
+
+    const [page, setPage] = useState(1);
+    const rowsPerPage = 5;
+
+    const debouncedValue = useDebounce(search, 500);
+
+    const inputRef = useRef();
+
+    const STATUS_LABELS = {
+        1: "Chờ xác nhận",
+        2: "Đã xác nhận",
+        3: "Trả phòng",
+        4: "Đã hủy",
+        5: "Từ chối",
+    };
+
+    const getStatusClassName = (status) => {
+        switch (parseInt(status)) {
+            case 1:
+                return "pending";
+            case 2:
+                return "confirmed";
+            case 3:
+                return "checked-out";
+            case 4:
+                return "cancelled";
+            case 5:
+                return "rejected";
+            default:
+                return "";
+        }
+    };
+
+    const statuses = [...new Set(histories.map((history) => history.status))];
+
+    useEffect(() => {
+        fetchHistories();
+    }, []);
+
+    // Hàm gọi API để lấy danh sách sự kiện
+    const fetchHistories = async () => {
+        try {
+            setIsLoading(true);
+            const result = await api.getAllHistory();
+            setHistories(result);
+            setFilteredRows(result);
+            setIsLoading(false);
+        } catch (error) {
+            setIsLoading(false);
+            // toast.error(`Có lỗi: ${error.message}`);
+        }
+    };
+
+    // Hàm xử lý tìm kiếm khi có sự thay đổi trong từ khóa tìm kiếm
+    useEffect(() => {
+        const fetchApi = async () => {
+            setLoadingSearch(true); 
+
+            const result = await api.searchHistories(debouncedValue);
+            setLoadingSearch(false); 
+            return result; 
+        };
+
+        // Kiểm tra xem từ khóa tìm kiếm không phải là chuỗi rỗng
+        if (debouncedValue.trim() !== "") {
+            fetchApi(); 
+        }
+    }, [debouncedValue]);
+
+    const handleClear = () => {
+        setSearch("");
+        inputRef.current.focus();
+        setFilteredRows(histories);
+        setSelectedStatus("");
+        setSelectedDateRange([null, null]);
+    };
+
+    const handleSearchChange = (event) => {
+        const searchValue = event.target.value;
+        if (!searchValue.startsWith(" ")) {
+            setSearch(searchValue);
+        }
+    };
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    // Xử lý khi trạng thái thay đổi
+    const handleStatusChange = (event) => {
+        const selectedStatusValue = parseInt(event.target.value);
+        setSelectedStatus(selectedStatusValue);
+        filterRows(selectedStatusValue, debouncedValue, selectedDateRange);
+    };
+
+    // Xử lý khi click vào button tìm kiếm
+    const handleSearch = () => {
+        filterRows(selectedStatus, debouncedValue, selectedDateRange);
+    };
+
+    const filterRows = (selectedStatus, searchTerm, dateRange) => {
+        const [startDate, endDate] = dateRange;
+        const filteredRows = histories.filter((history) => {
+            const statusMatch = !selectedStatus || history.status === selectedStatus;
+            const nameMatch =
+                !searchTerm ||
+                (history.fullName &&
+                    history.fullName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                (history.roomName &&
+                    history.roomName.toLowerCase().includes(searchTerm.toLowerCase()));
+            const timeMatch =
+                (!startDate ||
+                    dayjs(history.reserveTime).isAfter(startDate) ||
+                    dayjs(history.reserveTime).isSame(startDate, "day")) &&
+                (!endDate ||
+                    dayjs(history.endTime).isBefore(endDate) ||
+                    dayjs(history.endTime).isSame(endDate, "day"));
+            return statusMatch && nameMatch && timeMatch;
+        });
+        setFilteredRows(filteredRows);
+        setPage(1);
+    };
+
+    const handleDateRangeChange = (newDateRange) => {
+        setSelectedDateRange(newDateRange);
+        filterRows(selectedStatus, search, newDateRange);
+    };
+
+    const formatDate = (date) => {
+        if (!date) return "";
+        try {
+            return format(new Date(date), "dd/MM/yyyy HH:mm:ss");
+        } catch (error) {
+            return "";
+        }
+    };
+
+    return (
+        <div className="history">
+            <Sidebar />
+            <div className="historyContainer">
+                <Navbar />
+                <div className="historyList">
+                    <div className="datatableTitle">
+                        <span>Lịch sử đặt và hủy phòng</span>
+                    </div>
+                    <div className="historySearch">
+                        <select
+                            className="select"
+                            value={selectedStatus}
+                            onChange={handleStatusChange}
+                        >
+                            <option value={0}>-- Chọn trạng thái --</option>
+                            {statuses.map((status) => (
+                                <option key={status} value={status}>
+                                    {STATUS_LABELS[status]}
+                                </option>
+                            ))}
+                        </select>
+                        <div className="date">
+                            <LocalizationProvider dateAdapter={AdapterDayjs} locale="vi">
+                                <DemoContainer components={["SingleInputDateRangeField"]}>
+                                    <DateRangePicker
+                                        inputFormat="DD/MM/YYYY"
+                                        slots={{ field: SingleInputDateRangeField }}
+                                        name="allowedRange"
+                                        value={selectedDateRange}
+                                        onChange={handleDateRangeChange}
+                                    />
+                                </DemoContainer>
+                            </LocalizationProvider>
+                        </div>
+
+                        <div className="search">
+                            <input
+                                ref={inputRef}
+                                spellCheck={false}
+                                placeholder="Nhập tên phòng hoặc họ tên khách hàng muốn tìm."
+                                value={search}
+                                onChange={handleSearchChange}
+                            />
+                            {!!search && !loadingSearch && (
+                                <button className="clear" onClick={handleClear}>
+                                    <CancelIcon className="icon-search" />
+                                </button>
+                            )}
+                            {loadingSearch && (
+                                <RotateRightOutlinedIcon className="loading icon-search" />
+                            )}
+
+                            <button className="search-btn" onClick={handleSearch}>
+                                <SearchOutlinedIcon />
+                            </button>
+                        </div>
+                    </div>
+                    {isLoading ? (
+                        <p>Đang tải dữ liệu...</p>
+                    ) : (
+                        <>
+                            <div className="historytable">
+                                <TableContainer
+                                    component={Paper}
+                                    className="tablecontainer"
+                                >
+                                    {filteredRows.length === 0 && (
+                                        <div className="no-data-message">
+                                            Không tìm thấy kết quả tìm kiếm.
+                                        </div>
+                                    )}
+                                    <Table
+                                        sx={{ minWidth: 650 }}
+                                        aria-label="simple table"
+                                    >
+                                        {filteredRows.length > 0 && (
+                                            <TableHead>
+                                                <TableRow>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Tên phòng
+                                                    </TableCell>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Họ tên
+                                                    </TableCell>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Thời gian đặt
+                                                    </TableCell>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Thời gian trả
+                                                    </TableCell>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Thời gian chấp nhận
+                                                    </TableCell>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Thời gian kết thúc
+                                                    </TableCell>
+                                                    <TableCell className="tableCell tabble-header">
+                                                        Trạng thái
+                                                    </TableCell>
+                                                    <TableCell
+                                                        className="tableCell tabble-header"
+                                                        colSpan={2}
+                                                        align="center"
+                                                    >
+                                                        Thao tác
+                                                    </TableCell>
+                                                </TableRow>
+                                            </TableHead>
+                                        )}
+                                        <TableBody>
+                                            {filteredRows
+                                                .slice(
+                                                    (page - 1) * rowsPerPage,
+                                                    page * rowsPerPage
+                                                )
+                                                .map((history) => (
+                                                    <TableRow key={history.id}>
+                                                        <TableCell className="tableCell">
+                                                            <div className="cellWrapper">
+                                                                {history.roomName}
+                                                            </div>
+                                                        </TableCell>
+                                                        <TableCell className="tableCell">
+                                                            {history.fullName}
+                                                        </TableCell>
+                                                        <TableCell className="tableCell">
+                                                            {formatDate(
+                                                                history.reserveTime
+                                                            )}
+                                                        </TableCell>
+                                                        <TableCell className="tableCell">
+                                                            {formatDate(
+                                                                history.returnTime
+                                                            )}
+                                                        </TableCell>
+                                                        <TableCell className="tableCell">
+                                                            {formatDate(
+                                                                history.acceptTime
+                                                            )}
+                                                        </TableCell>
+                                                        <TableCell className="tableCell">
+                                                            {formatDate(history.endTime)}
+                                                        </TableCell>
+                                                        <TableCell className="tableCell">
+                                                            <span
+                                                                className={`status ${getStatusClassName(
+                                                                    history.status
+                                                                )}`}
+                                                            >
+                                                                {
+                                                                    STATUS_LABELS[
+                                                                        history.status
+                                                                    ]
+                                                                }
+                                                            </span>
+                                                        </TableCell>
+                                                        <TableCell className="tableCell btn-action">
+                                                            <Link
+                                                                to={`/histories/detail-history/${history.id}`}
+                                                                className="btn"
+                                                            >
+                                                                <button className="detailBtn">
+                                                                    Xem chi tiết
+                                                                </button>
+                                                            </Link>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                ))}
+                                        </TableBody>
+                                    </Table>
+                                </TableContainer>
+                                {filteredRows.length > 0 && (
+                                    <Pagination
+                                        className="pagination"
+                                        count={Math.ceil(
+                                            filteredRows.length / rowsPerPage
+                                        )}
+                                        page={page}
+                                        onChange={handleChangePage}
+                                    />
+                                )}
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default History;

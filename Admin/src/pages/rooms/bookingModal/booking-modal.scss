@@ -1,0 +1,111 @@
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.booking-modal {
+    background: #fff;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    top: 80px;
+
+    h2 {
+        margin-bottom: 20px;
+        text-align: center;
+        color: #210876;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #210876;
+        }
+
+        .check {
+            font-size: 20px;
+            color: red;
+            position: relative;
+            top: 6px;            
+            left: 2px;
+        }
+
+        input,
+        select,
+        .react-datepicker-wrapper {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        .react-datepicker__input-container {
+            input {
+                width: 100%;
+            }
+        }
+
+    }
+    
+    .error {
+        font-size: 14px;
+        color: red;
+    }
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        float: right;
+
+        &:first-of-type {
+            background: #f4f4f4;
+            color: #333;
+            margin-left: 20px;
+            border: 1px dotted #bbbb;
+
+            &:hover {
+                background: #e7e7e7;
+            }
+        }
+
+        &:last-of-type {
+            background: #3c8dbc;
+            border: 1px dotted #fff;
+            color: white;
+
+            &:hover {
+                background: #367fa9;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
+
+    @media (max-width: 480px) {
+        width: 95%;
+        padding: 10px;
+
+        button {
+            width: 100%;
+            margin-top: 10px;
+
+            &:first-of-type {
+                margin-right: 0;
+            }
+        }
+    }
+}
